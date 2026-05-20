@@ -36,6 +36,11 @@
     aspect-ratio: 1;
     margin: 18px 0 16px;
     object-fit: contain;
+
+    &--empty {
+      border-radius: 50%;
+      background: #e2e8f0;
+    }
   }
 
   h2 {

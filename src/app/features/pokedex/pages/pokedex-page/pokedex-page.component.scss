@@ -13,4 +13,21 @@
     width: min(1180px, 100%);
     margin: 0 auto;
   }
+
+  &__state {
+    width: min(520px, 100%);
+    margin: 40px auto 0;
+    border-radius: 18px;
+    padding: 18px 20px;
+    color: #475569;
+    font-weight: 700;
+    text-align: center;
+    background: #ffffff;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+
+    &--error {
+      color: #b91c1c;
+      background: #fff1f2;
+    }
+  }
 }

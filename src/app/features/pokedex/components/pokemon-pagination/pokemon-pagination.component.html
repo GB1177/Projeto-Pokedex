@@ -1,5 +1,16 @@
 <nav class="pokemon-pagination" aria-label="Paginacao da Pokedex">
-  <button type="button" aria-label="Pagina anterior" disabled>Anterior</button>
-  <span>Pagina 1</span>
-  <button type="button" aria-label="Proxima pagina" disabled>Proxima</button>
+  <button
+    type="button"
+    aria-label="Pagina anterior"
+    [disabled]="!hasPreviousPage || isLoading"
+    (click)="goToPreviousPage()"
+  >
+    Anterior
+  </button>
+
+  <span>Pagina {{ currentPage }}</span>
+
+  <button type="button" aria-label="Proxima pagina" [disabled]="!hasNextPage || isLoading" (click)="goToNextPage()">
+    Proxima
+  </button>
 </nav>

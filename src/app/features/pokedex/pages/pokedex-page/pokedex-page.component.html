@@ -3,7 +3,22 @@
 <main class="pokedex-page">
   <section class="pokedex-page__content" aria-label="Pokedex">
     <app-pokemon-search />
-    <app-pokemon-grid />
-    <app-pokemon-pagination />
+
+    @if (store.isLoading()) {
+      <p class="pokedex-page__state">Carregando Pokemon...</p>
+    } @else if (store.error()) {
+      <p class="pokedex-page__state pokedex-page__state--error">{{ store.error() }}</p>
+    } @else if (store.pokemons().length === 0) {
+      <p class="pokedex-page__state">Nenhum Pokemon encontrado.</p>
+    } @else {
+      <app-pokemon-grid [pokemons]="store.pokemons()" />
+      <app-pokemon-pagination
+        [currentPage]="store.currentPage()"
+        [hasPreviousPage]="hasPreviousPage()"
+        [hasNextPage]="store.hasNextPage()"
+        [isLoading]="store.isLoading()"
+        (pageChange)="onPageChange($event)"
+      />
+    }
   </section>
 </main>

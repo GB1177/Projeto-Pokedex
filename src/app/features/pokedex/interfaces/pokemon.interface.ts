@@ -30,3 +30,16 @@ export interface PokemonDetail {
     };
   };
 }
+
+export interface PokemonCardView {
+  id: number;
+  name: string;
+  number: string;
+  imageUrl: string | null;
+  type: string;
+}
+
+export interface PokemonPage {
+  pokemons: PokemonCardView[];
+  hasNextPage: boolean;
+}

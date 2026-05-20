@@ -1,12 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-export interface PokemonCard {
-  id: number;
-  name: string;
-  number: string;
-  type: string;
-  imageUrl: string;
-}
+import { PokemonCardView } from '../../interfaces/pokemon.interface';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -15,5 +9,5 @@ export interface PokemonCard {
   styleUrl: './pokemon-card.component.scss'
 })
 export class PokemonCardComponent {
-  @Input({ required: true }) pokemon!: PokemonCard;
+  @Input({ required: true }) pokemon!: PokemonCardView;
 }
