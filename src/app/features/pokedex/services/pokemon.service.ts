@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, forkJoin, map, of, shareReplay, switchMap } from 'rxjs';
 
+import { environment } from '../../../../environments/environment';
 import {
   PokemonCardView,
   PokemonDetail,
@@ -15,7 +16,7 @@ import {
 })
 export class PokemonService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'https://pokeapi.co/api/v2/';
+  private readonly baseUrl = environment.pokeApiBaseUrl;
   private readonly pokemonIndex$ = this.getPokemons(100000, 0).pipe(
     map((response) => response.results),
     shareReplay({ bufferSize: 1, refCount: true })
