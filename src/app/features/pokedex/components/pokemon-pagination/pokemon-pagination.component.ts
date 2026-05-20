@@ -36,13 +36,32 @@ export class PokemonPaginationComponent {
 
   protected get paginationItems(): Array<number | 'ellipsis'> {
     const pages = new Set<number>([1, this.totalPages]);
-    const start = Math.max(1, this.currentPage - 1);
-    const end = Math.min(this.totalPages, this.currentPage + 1);
+    const range = this.totalPages > 20 ? 1 : 2;
+    const start = Math.max(1, this.currentPage - range);
+    const end = Math.min(this.totalPages, this.currentPage + range);
 
     for (let page = start; page <= end; page++) {
       pages.add(page);
     }
 
+    const sortedPages = Array.from(pages).sort((firstPage, secondPage) => firstPage - secondPage);
+    const items: Array<number | 'ellipsis'> = [];
+
+    sortedPages.forEach((page, index) => {
+      const previousPage = sortedPages[index - 1];
+
+      if (previousPage && page - previousPage > 1) {
+        items.push('ellipsis');
+      }
+
+      items.push(page);
+    });
+
+    return items;
+  }
+
+  protected get compactPaginationItems(): Array<number | 'ellipsis'> {
+    const pages = new Set<number>([1, this.currentPage, this.totalPages]);
     const sortedPages = Array.from(pages).sort((firstPage, secondPage) => firstPage - secondPage);
     const items: Array<number | 'ellipsis'> = [];
 

@@ -1,14 +1,21 @@
-<nav class="pokemon-pagination" aria-label="Paginacao da Pokedex">
+<nav class="pokemon-pagination" aria-label="Paginação da Pokédex">
   <button
+    class="pokemon-pagination__nav-button"
     type="button"
-    aria-label="Pagina anterior"
+    aria-label="Página anterior"
     [disabled]="!hasPreviousPage || isLoading"
     (click)="goToPreviousPage()"
   >
-    <- Anterior
+    <img
+      class="pokemon-pagination__icon pokemon-pagination__icon--previous"
+      src="assets/img/pagination-arrow-icon.svg"
+      alt=""
+      aria-hidden="true"
+    />
+    <span>Anterior</span>
   </button>
 
-  <div class="pokemon-pagination__pages" aria-label="Paginas">
+  <div class="pokemon-pagination__pages pokemon-pagination__pages--desktop" aria-label="Páginas">
     @for (item of paginationItems; track $index) {
       @if (item === 'ellipsis') {
         <span class="pokemon-pagination__ellipsis">...</span>
@@ -27,7 +34,38 @@
     }
   </div>
 
-  <button type="button" aria-label="Proxima pagina" [disabled]="!hasNextPage || isLoading" (click)="goToNextPage()">
-    Próximo ->
+  <div class="pokemon-pagination__pages pokemon-pagination__pages--mobile" aria-label="Páginas">
+    @for (item of compactPaginationItems; track $index) {
+      @if (item === 'ellipsis') {
+        <span class="pokemon-pagination__ellipsis">...</span>
+      } @else {
+        <button
+          class="pokemon-pagination__page"
+          type="button"
+          [class.pokemon-pagination__page--active]="item === currentPage"
+          [attr.aria-current]="item === currentPage ? 'page' : null"
+          [disabled]="isLoading || item === currentPage"
+          (click)="goToPage(item)"
+        >
+          {{ item }}
+        </button>
+      }
+    }
+  </div>
+
+  <button
+    class="pokemon-pagination__nav-button"
+    type="button"
+    aria-label="Próxima página"
+    [disabled]="!hasNextPage || isLoading"
+    (click)="goToNextPage()"
+  >
+    <span>Próximo</span>
+    <img
+      class="pokemon-pagination__icon pokemon-pagination__icon--next"
+      src="assets/img/pagination-arrow-icon.svg"
+      alt=""
+      aria-hidden="true"
+    />
   </button>
 </nav>
