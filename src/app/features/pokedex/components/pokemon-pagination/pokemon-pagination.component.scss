@@ -2,7 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: 36px;
 
   button {
@@ -22,8 +23,55 @@
     }
   }
 
-  span {
+  &__pages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__page {
+    border-radius: 10px;
+    min-width: 42px;
+    padding: 0 12px;
+
+    &:not(:disabled):hover {
+      border-color: #202124;
+      color: #ffffff;
+      background: #202124;
+      cursor: pointer;
+    }
+
+    &--active,
+    &--active:disabled {
+      border-color: #202124;
+      color: #ffffff;
+      background: #202124;
+      cursor: default;
+    }
+  }
+
+  &__ellipsis {
     color: #475569;
     font-weight: 700;
+    padding: 0 2px;
+  }
+}
+
+@media (max-width: 520px) {
+  .pokemon-pagination {
+    gap: 8px;
+
+    button {
+      min-height: 38px;
+      padding: 0 12px;
+      font-size: 0.875rem;
+    }
+
+    &__page {
+      min-width: 38px;
+      padding: 0 10px;
+    }
   }
 }

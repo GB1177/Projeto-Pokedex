@@ -41,5 +41,5 @@ export interface PokemonCardView {
 
 export interface PokemonPage {
   pokemons: PokemonCardView[];
-  hasNextPage: boolean;
+  totalCount: number;
 }

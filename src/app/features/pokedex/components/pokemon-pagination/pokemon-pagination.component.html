@@ -5,12 +5,29 @@
     [disabled]="!hasPreviousPage || isLoading"
     (click)="goToPreviousPage()"
   >
-    Anterior
+    <- Anterior
   </button>
 
-  <span>Pagina {{ currentPage }}</span>
+  <div class="pokemon-pagination__pages" aria-label="Paginas">
+    @for (item of paginationItems; track $index) {
+      @if (item === 'ellipsis') {
+        <span class="pokemon-pagination__ellipsis">...</span>
+      } @else {
+        <button
+          class="pokemon-pagination__page"
+          type="button"
+          [class.pokemon-pagination__page--active]="item === currentPage"
+          [attr.aria-current]="item === currentPage ? 'page' : null"
+          [disabled]="isLoading || item === currentPage"
+          (click)="goToPage(item)"
+        >
+          {{ item }}
+        </button>
+      }
+    }
+  </div>
 
   <button type="button" aria-label="Proxima pagina" [disabled]="!hasNextPage || isLoading" (click)="goToNextPage()">
-    Proxima
+    Próximo ->
   </button>
 </nav>

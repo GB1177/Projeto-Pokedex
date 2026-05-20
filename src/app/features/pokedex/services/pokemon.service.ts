@@ -1,8 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
+import { Observable, forkJoin, map, of, shareReplay, switchMap } from 'rxjs';
 
-import { PokemonCardView, PokemonDetail, PokemonListResponse, PokemonPage } from '../interfaces/pokemon.interface';
+import {
+  PokemonCardView,
+  PokemonDetail,
+  PokemonListItem,
+  PokemonListResponse,
+  PokemonPage
+} from '../interfaces/pokemon.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +16,10 @@ import { PokemonCardView, PokemonDetail, PokemonListResponse, PokemonPage } from
 export class PokemonService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'https://pokeapi.co/api/v2/';
+  private readonly pokemonIndex$ = this.getPokemons(100000, 0).pipe(
+    map((response) => response.results),
+    shareReplay({ bufferSize: 1, refCount: true })
+  );
 
   getPokemons(limit: number, offset: number): Observable<PokemonListResponse> {
     const params = new HttpParams()
@@ -23,6 +33,20 @@ export class PokemonService {
     return this.http.get<PokemonDetail>(`${this.baseUrl}pokemon/${name}`);
   }
 
+  getPokemonIndex(): Observable<PokemonListItem[]> {
+    return this.pokemonIndex$;
+  }
+
+  getPokemonCardsByNames(names: string[]): Observable<PokemonCardView[]> {
+    if (names.length === 0) {
+      return of([]);
+    }
+
+    return forkJoin(names.map((name) => this.getPokemonByName(name))).pipe(
+      map((pokemons) => pokemons.map((pokemon) => this.mapToCardView(pokemon)))
+    );
+  }
+
   getPokemonPage(limit: number, offset: number): Observable<PokemonPage> {
     return this.getPokemons(limit, offset).pipe(
       switchMap((response) => {
@@ -32,7 +56,7 @@ export class PokemonService {
         return details$.pipe(
           map((pokemons) => ({
             pokemons: pokemons.map((pokemon) => this.mapToCardView(pokemon)),
-            hasNextPage: response.next !== null
+            totalCount: response.count
           }))
         );
       })

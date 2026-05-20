@@ -1,13 +1,7 @@
 .pokemon-search {
   display: grid;
   justify-items: center;
-  gap: 12px;
-  margin-bottom: 34px;
-
-  &__label {
-    color: #334155;
-    font-weight: 700;
-  }
+  margin-bottom: 32px;
 
   &__control {
     position: relative;
@@ -22,11 +16,24 @@
     padding: 0 56px 0 22px;
     color: #1f2937;
     font: inherit;
-    background: #ffffff;
-    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+    background: #f5f5f5;
+    box-shadow: none;
 
     &::placeholder {
-      color: #94a3b8;
+      color: #000000;
+      opacity: 1;
+    }
+
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration {
+      appearance: none;
+    }
+
+    &::-ms-clear,
+    &::-ms-reveal {
+      display: none;
+      width: 0;
+      height: 0;
     }
   }
 
@@ -51,6 +58,75 @@
       background: #64748b;
       transform: rotate(45deg);
       transform-origin: center;
+    }
+  }
+
+  &__clear {
+    position: absolute;
+    top: 50%;
+    right: 17px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transform: translateY(-50%);
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 7px;
+      width: 16px;
+      height: 2px;
+      border-radius: 999px;
+      background: #64748b;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+
+    &:hover {
+      background: #f1f5f9;
+    }
+  }
+
+  &__suggestions {
+    position: absolute;
+    z-index: 2;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 8px;
+    background: #ffffff;
+    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+
+    button {
+      display: block;
+      width: 100%;
+      min-height: 40px;
+      border: 0;
+      border-radius: 12px;
+      padding: 0 14px;
+      color: #1f2937;
+      font: inherit;
+      font-weight: 700;
+      text-align: left;
+      background: transparent;
+      cursor: pointer;
+
+      &:hover {
+        background: #f1f5f9;
+      }
     }
   }
 }

@@ -1,7 +1,36 @@
 <section class="pokemon-search" aria-label="Busca de Pokemon">
-  <label class="pokemon-search__label" for="pokemon-search">Buscar Pokemon</label>
   <div class="pokemon-search__control">
-    <input id="pokemon-search" type="search" placeholder="Pesquise por nome ou numero" />
-    <span class="pokemon-search__icon" aria-hidden="true"></span>
+    <input
+      id="pokemon-search"
+      type="search"
+      placeholder="Faça uma busca pelo nome do pokémon"
+      autocomplete="off"
+      aria-label="Faça uma busca pelo nome do pokémon"
+      [formControl]="searchControl"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+    />
+
+    @if (searchTerm()) {
+      <button
+        class="pokemon-search__clear"
+        type="button"
+        title="Limpar busca"
+        aria-label="Limpar busca"
+        (click)="clearSearch()"
+      ></button>
+    } @else {
+      <span class="pokemon-search__icon" aria-hidden="true"></span>
+    }
+
+    @if (shouldShowSuggestions()) {
+      <div class="pokemon-search__suggestions" role="listbox">
+        @for (pokemon of filteredSuggestions(); track pokemon.name) {
+          <button type="button" role="option" (click)="selectSuggestion(pokemon)">
+            {{ pokemon.name }}
+          </button>
+        }
+      </div>
+    }
   </div>
 </section>

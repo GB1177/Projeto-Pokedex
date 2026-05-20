@@ -2,23 +2,31 @@
 
 <main class="pokedex-page">
   <section class="pokedex-page__content" aria-label="Pokedex">
-    <app-pokemon-search />
+    <app-pokemon-search [suggestions]="store.pokemonIndex()" (searchChange)="onSearchChange($event)" />
 
     @if (store.isLoading()) {
       <p class="pokedex-page__state">Carregando Pokemon...</p>
     } @else if (store.error()) {
       <p class="pokedex-page__state pokedex-page__state--error">{{ store.error() }}</p>
-    } @else if (store.pokemons().length === 0) {
+    } @else if (store.visiblePokemons().length === 0) {
       <p class="pokedex-page__state">Nenhum Pokemon encontrado.</p>
     } @else {
-      <app-pokemon-grid [pokemons]="store.pokemons()" />
-      <app-pokemon-pagination
-        [currentPage]="store.currentPage()"
-        [hasPreviousPage]="hasPreviousPage()"
-        [hasNextPage]="store.hasNextPage()"
-        [isLoading]="store.isLoading()"
-        (pageChange)="onPageChange($event)"
-      />
+      @if (store.isSearchActive()) {
+        <p class="pokedex-page__search-label">Resultado da busca</p>
+      }
+
+      <app-pokemon-grid [pokemons]="store.visiblePokemons()" />
+
+      @if (!store.isSearchActive()) {
+        <app-pokemon-pagination
+          [currentPage]="store.currentPage()"
+          [totalPages]="store.totalPages()"
+          [hasPreviousPage]="hasPreviousPage()"
+          [hasNextPage]="store.hasNextPage()"
+          [isLoading]="store.isLoading()"
+          (pageChange)="onPageChange($event)"
+        />
+      }
     }
   </section>
 </main>

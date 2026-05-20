@@ -1,13 +1,14 @@
 :host {
   display: block;
   min-height: 100vh;
-  background: #f4f7fb;
+  background: #ffffff;
   color: #1f2937;
 }
 
 .pokedex-page {
   min-height: calc(100vh - 72px);
-  padding: clamp(28px, 5vw, 56px) clamp(16px, 5vw, 72px) 40px;
+  background: #ffffff;
+  padding: clamp(24px, 4vw, 48px) clamp(16px, 5vw, 72px) 40px;
 
   &__content {
     width: min(1180px, 100%);
@@ -29,5 +30,13 @@
       color: #b91c1c;
       background: #fff1f2;
     }
+  }
+
+  &__search-label {
+    margin: 0 0 18px;
+    color: #475569;
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-align: center;
   }
 }

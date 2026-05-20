@@ -1,6 +1,6 @@
 <article class="pokemon-card">
   <div class="pokemon-card__meta">
-    <span class="pokemon-card__type">{{ pokemon.type }}</span>
+    <span class="pokemon-card__type" [ngClass]="typeClass">{{ pokemon.type }}</span>
     <span class="pokemon-card__number">{{ pokemon.number }}</span>
   </div>
 
