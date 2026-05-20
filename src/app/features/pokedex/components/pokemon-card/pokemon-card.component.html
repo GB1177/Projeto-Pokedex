@@ -1,0 +1,10 @@
+<article class="pokemon-card">
+  <div class="pokemon-card__meta">
+    <span class="pokemon-card__type">{{ pokemon.type }}</span>
+    <span class="pokemon-card__number">{{ pokemon.number }}</span>
+  </div>
+
+  <img class="pokemon-card__image" [src]="pokemon.imageUrl" [alt]="pokemon.name" />
+
+  <h2>{{ pokemon.name }}</h2>
+</article>

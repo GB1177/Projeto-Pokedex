@@ -1,0 +1,5 @@
+<section class="pokemon-grid" aria-label="Lista de Pokemon">
+  @for (pokemon of pokemons; track pokemon.id) {
+    <app-pokemon-card [pokemon]="pokemon" />
+  }
+</section>

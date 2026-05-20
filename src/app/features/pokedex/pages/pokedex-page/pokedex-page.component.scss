@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f4f7fb;
+  color: #1f2937;
+}
+
+.pokedex-page {
+  min-height: calc(100vh - 72px);
+  padding: clamp(28px, 5vw, 56px) clamp(16px, 5vw, 72px) 40px;
+
+  &__content {
+    width: min(1180px, 100%);
+    margin: 0 auto;
+  }
+}

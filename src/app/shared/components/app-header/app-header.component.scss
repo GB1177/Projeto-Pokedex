@@ -1,0 +1,53 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  padding: 0 clamp(20px, 6vw, 80px);
+  background: #ffffff;
+  box-shadow: 0 2px 18px rgba(15, 23, 42, 0.08);
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+
+    img {
+      display: block;
+      width: clamp(116px, 14vw, 164px);
+      height: auto;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 4vw, 48px);
+
+    a {
+      color: #1f2937;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+
+      &[aria-current='page'] {
+        color: #e3350d;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    min-height: 64px;
+    padding-inline: 16px;
+
+    &__logo img {
+      width: 108px;
+    }
+
+    &__nav {
+      gap: 16px;
+    }
+  }
+}
