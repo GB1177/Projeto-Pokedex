@@ -1,15 +1,32 @@
 # Pokédex
 
-Projeto front-end desenvolvido em Angular para um desafio técnico. A aplicação apresenta uma Pokédex com layout responsivo, listagem de Pokémon, paginação e integração com a PokéAPI.
+Projeto front-end desenvolvido em Angular 17 como parte de um desafio técnico. A aplicação apresenta uma Pokédex responsiva com listagem de Pokémon, busca dinâmica, autocomplete, paginação e integração com a PokéAPI.
 
 ## Tecnologias
 
-- Angular 17
-- Angular CLI 17
-- TypeScript
-- SCSS
-- Standalone Components
-- PokéAPI
+* Angular 17
+* Angular CLI 17
+* TypeScript
+* SCSS
+* Standalone Components
+* RxJS
+* PokéAPI
+
+## Justificativa da escolha do Angular
+
+Apesar do desafio sugerir o uso de Vanilla JavaScript, foi utilizado Angular 17 por ser a tecnologia com a qual possuo maior experiência profissional, permitindo focar na organização da arquitetura, componentização, responsividade, gerenciamento de estado local e experiência do usuário.
+
+A aplicação foi desenvolvida sem bibliotecas externas de UI e sem soluções complexas de gerenciamento global de estado, priorizando simplicidade, legibilidade e facilidade de manutenção.
+
+## Funcionalidades
+
+* Listagem paginada de Pokémon
+* Busca dinâmica sem recarregamento de página
+* Autocomplete de busca
+* Paginação responsiva
+* Integração com PokéAPI
+* Hover e interações visuais
+* Responsividade para desktop e mobile
 
 ## Como rodar o projeto
 
@@ -41,16 +58,35 @@ npm run build
 
 Os arquivos gerados ficam na pasta `dist/`.
 
-## Estrutura principal
+## Estrutura do projeto
 
-A feature da Pokédex fica em:
+A feature principal da Pokédex está organizada em:
 
 ```txt
 src/app/features/pokedex
 ```
 
-Ela foi organizada separando página, componentes, serviço, interfaces e estado local simples, sem NgRx e sem bibliotecas externas de UI.
+A estrutura foi separada em:
+
+* páginas;
+* componentes;
+* serviços;
+* interfaces;
+* estado local simples.
+
+O projeto utiliza:
+
+* Standalone Components;
+* lazy loading;
+* ChangeDetectionStrategy.OnPush;
+* Signals e RxJS para controle de estado e reatividade.
 
 ## Observações
 
-O projeto usa a PokéAPI como fonte de dados e mantém a responsabilidade dos componentes separada para facilitar manutenção, evolução visual e explicação em entrevista.
+O projeto foi desenvolvido buscando manter:
+
+* separação de responsabilidades;
+* código limpo e legível;
+* responsividade;
+* experiência fluida sem recarregamento;
+* organização compatível com aplicações Angular modernas.
